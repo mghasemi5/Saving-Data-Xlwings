@@ -48,11 +48,12 @@ while True:
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     # Write the index prices to specific cells
-    sheet.range(f"A{sheet.cells.last_cell.row}").end('up').offset(1).value = timestamp
-    sheet.range(f"B{sheet.cells.last_cell.row}").end('up').offset(1).value = sp_price
-    sheet.range(f"C{sheet.cells.last_cell.row}").end('up').offset(1).value =dow30_price
-    sheet.range(f"D{sheet.cells.last_cell.row}").end('up').offset(1).value = nasdaq_price
-    sheet.range(f"E{sheet.cells.last_cell.row}").end('up').offset(1).value = russel_price
+    last_row = sheet.range(f"A{sheet.cells.last_cell.row}").end('up').row + 1
+    sheet.range(f"A{last_row}").value = timestamp
+    sheet.range(f"B{last_row}").value = sp_price
+    sheet.range(f"C{last_row}").value = dow30_price
+    sheet.range(f"D{last_row}").value = nasdaq_price
+    sheet.range(f"E{last_row}").value = russel_price
     # Save and close the workbook
     wb.save('index_prices.xlsx')
     time.sleep(300)
